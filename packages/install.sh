@@ -1,65 +1,58 @@
 #! /bin/bash
 
-su root
-
 # Timezone set
-timedatectl set-timezone Europe/London
+sudo timedatectl set-timezone Europe/London
 
 # Update
-pacman -Syu
+sudo pacman -Syu
 
 # pacman config
-cp ./confs/pacman.conf /etc/pacman.conf
-
-pacman -S --needed reflector
-echo "Making a backup of the mirror list"
-cp /etc/pacman.d/mirrorlist 
-echo "Completed"
+sudo cp ./confs/pacman.conf /etc/pacman.conf
 
 # Reflector
-pacman -S --needed reflector
+sudo pacman -S --needed reflector
 echo "Making a backup of the mirror list"
-cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak
+sudo cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak
 echo "Completed"
 
-reflector --country 'GB' --latest 5 --age 2 --fastest 5 --protocol https --sort rate --save /etc/pacman.d/mirrorlist
+sudo reflector --country 'GB' --latest 5 --age 2 --fastest 5 --protocol https --sort rate --save /etc/pacman.d/mirrorlist
 
 # Superuser support
-pacman -S --needed sudo
+sudo pacman -S --needed sudo
 
 # Security
-pacman -S --needed ufw
-ufw enable
-systemctl enable ufw.service
+sudo pacman -S --needed ufw
+sudo ufw enable
+sudo systemctl enable ufw.service
 
 # Package Cleaning
-pacman -S pacman-contrib
-systemctl enable paccache.timer
+sudo pacman -S pacman-contrib
+sudo systemctl enable paccache.timer
 
 # Base Development tools
-pacman -S --needed base-devel git wget
+sudo pacman -S --needed base-devel git wget
 
 # Video Drivers
-pacman -S --needed intel-media-driver
+sudo pacman -S --needed intel-media-driver
 
 # Audio Drivers
-pacman -S --needed pipewire wireplumber pipewire-pulse pipewire-alsa
+sudo pacman -S --needed pipewire wireplumber pipewire-pulse pipewire-alsa
 
 # DE
-pacman -S --needed plasma-desktop plasma-nm plasma-pa kscreen
+sudo pacman -S --needed plasma-desktop plasma-nm plasma-pa kscreen
 
 # Display Manager
-pacman -S --needed sddm
-systemctl enable sddm.service
+sudo pacman -S --needed sddm
+sudo systemctl enable sddm.service
 
 # CLI/TUI applications
-pacman -S --needed kitty nano fastfetch btop powertop  spotifyd cmatrix
+sudo pacman -S --needed kitty nano fastfetch btop powertop  spotifyd cmatrix
 
 #  Fonts
-pacman -S --needed noto-fonts-* ttf-hack  powerline-fonts
+sudo pacman -S --needed noto-fonts-* ttf-hack  powerline-fonts
 
 #  Applications
-pacman -S --needed firefox thunderbird code p7zip nano dolphin spectacle discord
+sudo pacman -S --needed firefox thunderbird code p7zip nano dolphin spectacle discord
 
 # Install AUR helper
 git clone https://aur.archlinux.org/yay.git
@@ -87,8 +80,8 @@ cd ~
 cd git
 git clone https://github.com/catppuccin/papirus-folders.git catppuccin-papirus-folders && cd catppuccin-papirus-folders
 
-cp -r src/* /usr/share/icons/Papirus
-papirus-folders -C cat-macchiato-lavender --theme Papirus
+sudo cp -r src/* /usr/share/icons/Papirus
+sudo papirus-folders -C cat-macchiato-lavender --theme Papirus
 
 cd ~
 
@@ -104,7 +97,7 @@ cd ~
 cd git
 git clone https://github.com/catppuccin/btop catppuccin-btop && cd catppuccin-btop
 
-mkdir -p ~/.config/btop/themes && cp -r themes ~/.config/btop
+sudo mkdir -p ~/.config/btop/themes && cp -r themes ~/.config/btop
 
 cd ~
 
@@ -113,6 +106,6 @@ cd ~
 cd git
 git clone https://github.com/catppuccin/cava.git catppuccin-cava && cd catppuccin-cava
 
-mkdir -p ~/.config/cava/themes && cp -r themes/macchiato.cava ~/.config/cava/themes
+sudo mkdir -p ~/.config/cava/themes && cp -r themes/macchiato.cava ~/.config/cava/themes
 
 cd ~
