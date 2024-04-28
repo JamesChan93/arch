@@ -1,4 +1,5 @@
 #! /bin/bash
+# Script should be executed at the repo root
 
 # Timezone set
 sudo timedatectl set-timezone Europe/London
@@ -7,7 +8,7 @@ sudo timedatectl set-timezone Europe/London
 sudo pacman -Syu
 
 # pacman config
-sudo cp ./confs/pacman.conf /etc/pacman.conf
+sudo cp packages/confs/pacman.conf /etc/pacman.conf
 
 # Reflector
 sudo pacman -S --needed reflector
@@ -55,6 +56,7 @@ sudo pacman -S --needed noto-fonts-* ttf-hack  powerline-fonts
 sudo pacman -S --needed firefox thunderbird code p7zip nano dolphin spectacle discord
 
 # Install AUR helper
+cd ~
 git clone https://aur.archlinux.org/yay.git
 cd yay
 makepkg -si
@@ -67,7 +69,7 @@ yay -S --needed google-chrome nomacs cava discordo-git spotify-tui
 yay -S --needed google-chrome nomacs cava discordo-git spotify-tui
 
 # Catppuccin theme
-
+cd ~
 mkdir wget
 mkdir git
 
@@ -100,7 +102,6 @@ git clone https://github.com/catppuccin/btop catppuccin-btop && cd catppuccin-bt
 sudo mkdir -p ~/.config/btop/themes && cp -r themes ~/.config/btop
 
 cd ~
-
 
 # Catppuccin BTOP
 cd git
