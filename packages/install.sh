@@ -142,3 +142,10 @@ cd ~
 # Catppuccin sddm WIP
 sudo pacman -S --needed qt6-svg qt6-declarative
 sudo cp confs/sddm.conf /etc/
+
+# Catppuccin Thunderbird WIP
+cd git
+
+git clone https://github.com/catppuccin/thunderbird.git catppuccin-thunderbird
+
+cd ~
